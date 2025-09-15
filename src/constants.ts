@@ -1,3 +1,4 @@
+// src/constants.ts
 import { Product, Category } from "@/types";
 
 export const PRODUCTS: Product[] = [
@@ -11,7 +12,11 @@ export const PRODUCTS: Product[] = [
     unit: "m³",
     stock: 500,
     image: "/images/TanahUrug.png",
-    gallery: ["/images/TanahUrug.png"],
+    gallery: [
+      "/images/TanahUrug.png",
+      "/images/hero-section.png",
+      "/images/hero-section3.png",
+    ],
     specifications: {
       Asal: "Galian Proyek",
       Warna: "Coklat Kemerahan",
@@ -28,7 +33,11 @@ export const PRODUCTS: Product[] = [
     unit: "m³",
     stock: 350,
     image: "/images/Pasir-Pasang.png",
-    gallery: ["/images/Pasir-Pasang.png"],
+    gallery: [
+      "/images/Pasir-Pasang.png",
+      "/images/Pasir-Cor.png",
+      "/images/hero-section2.png",
+    ],
     specifications: {
       Asal: "Gunung Merapi",
       "Kadar Lumpur": "< 5%",
@@ -45,7 +54,11 @@ export const PRODUCTS: Product[] = [
     unit: "m³",
     stock: 200,
     image: "/images/Batu-Gunung.png",
-    gallery: ["/images/Batu-Gunung.png"],
+    gallery: [
+      "/images/Batu-Gunung.png",
+      "/images/Batu-Split.png",
+      "/images/hero-section3.png",
+    ],
     specifications: {
       Ukuran: "10-30 cm",
       Warna: "Abu-abu kehitaman",
@@ -62,7 +75,7 @@ export const PRODUCTS: Product[] = [
     unit: "m³",
     stock: 400,
     image: "/images/Batu-Split.png",
-    gallery: ["/images/Batu-Split.png"],
+    gallery: ["/images/Batu-Split.png", "/images/Batu-Koral-Sikat.png"],
     specifications: {
       Ukuran: "20-30 mm",
       Bentuk: "Kubikal, Bersudut",
@@ -79,7 +92,7 @@ export const PRODUCTS: Product[] = [
     unit: "karung (20kg)",
     stock: 1000,
     image: "/images/Batu-Koral-Sikat.png",
-    gallery: ["/images/Batu-Koral-Sikat.png"],
+    gallery: ["/images/Batu-Koral-Sikat.png", "/images/Batu-Gunung.png"],
     specifications: {
       Warna: "Pancawarna",
       Ukuran: "1-2 cm",
@@ -96,7 +109,7 @@ export const PRODUCTS: Product[] = [
     unit: "m³",
     stock: 300,
     image: "/images/Pasir-Cor.png",
-    gallery: ["/images/Pasir-Cor.png"],
+    gallery: ["/images/Pasir-Cor.png", "/images/Pasir-Pasang.png"],
     specifications: {
       Asal: "Sungai Progo",
       "Kadar Lumpur": "< 3%",
@@ -113,7 +126,7 @@ export const PRODUCTS: Product[] = [
     unit: "pcs",
     stock: 50000,
     image: "/images/Batu-Bata-Merah.png",
-    gallery: ["/images/Batu-Bata-Merah.png"],
+    gallery: ["/images/Batu-Bata-Merah.png", "/images/hero-section.png"],
     specifications: {
       Jenis: "Press Mesin",
       Ukuran: "20 x 10 x 5 cm",

@@ -1,34 +1,38 @@
+// src/app/product/[id]/page.tsx
 import React from "react";
 import type { Metadata } from "next";
 import { PRODUCTS } from "@/constants";
-import ProductDetailClient from "./product-detail-client"; // <-- Impor komponen klien baru
+import ProductDetailClient from "./product-detail-client";
 
 // 1. generateMetadata tetap di sini (ini adalah Server Component)
 export async function generateMetadata({
-  params,
+  params: paramsPromise,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const params = await paramsPromise;
   const product = PRODUCTS.find((p) => p.id === params.id);
 
   if (!product) {
-    return {
-      title: "Produk Tidak Ditemukan",
-    };
+    return { title: "Produk Tidak Ditemukan" };
   }
-
   return {
     title: `Jual ${product.name} - Batu Pasir Jaya`,
     description: product.description.substring(0, 160),
+    openGraph: {
+      images: [product.image],
+    },
   };
 }
 
-// 2. Komponen Halaman (Server Component)
-const ProductDetailPage = ({ params }: { params: { id: string } }) => {
-  // Ambil data di server
+const ProductDetailPage = async ({
+  params: paramsPromise,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const params = await paramsPromise;
   const product = PRODUCTS.find((p) => p.id === params.id);
 
-  // Kirim data ke komponen klien melalui props
   return <ProductDetailClient product={product} />;
 };
 

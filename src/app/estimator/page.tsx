@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import type { EstimatedMaterial } from "@/types";
-import Spinner from "@/components/Spinner";
 import { SparklesIcon } from "@/components/IconComponents";
 
 const EstimatorPage: React.FC = () => {
