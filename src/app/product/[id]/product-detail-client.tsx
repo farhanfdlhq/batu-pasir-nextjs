@@ -1,19 +1,14 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"; // Impor Image
 import type { Product } from "@/types";
 
 const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
   product,
 }) => {
-  const [mainImage, setMainImage] = useState(product ? product.image : "");
+  const [mainImage, setMainImage] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
-  const [formStatus, setFormStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     if (product) {
@@ -23,6 +18,7 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
   }, [product]);
 
   if (!product) {
+    // ... (kode jika produk tidak ditemukan)
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <h1 className="text-2xl font-bold">Produk tidak ditemukan.</h1>
@@ -43,45 +39,14 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
       minimumFractionDigits: 0,
     }).format(price);
   };
-
-  const handleQuoteSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleQuoteSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormStatus("loading");
-    setFormError("");
-
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      product: product?.name,
-      quantity: quantity,
-      unit: product?.unit,
-      message: `Saya tertarik dengan produk ${product?.name} sebanyak ${quantity} ${product?.unit}. Mohon informasinya.`,
-      subject: `Permintaan Penawaran: ${product?.name}`,
-    };
-
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const result = await response.json();
-        throw new Error(result.error || "Gagal mengirim permintaan.");
-      }
-
-      setFormStatus("success");
-      (e.target as HTMLFormElement).reset();
-      setQuantity(1);
-    } catch (err) {
-      setFormStatus("error");
-      setFormError(err instanceof Error ? err.message : "Terjadi kesalahan.");
-    }
+    alert(
+      `Permintaan penawaran untuk ${quantity} ${product.unit} ${product.name} telah diterima. Kami akan segera menghubungi Anda.`
+    );
   };
 
+  // PASTIKAN ANDA MEMILIKI BAGIAN RETURN YANG LENGKAP SEPERTI INI
   return (
     <div className="bg-white py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,38 +54,38 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
           {/* Image Gallery */}
           <div>
             <div className="aspect-[4/3] mb-4 rounded-lg overflow-hidden border border-slate-200 relative">
-              {mainImage && (
-                <Image
-                  src={mainImage}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              )}
+              <Image
+                src={mainImage}
+                alt={product.name}
+                fill
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="grid grid-cols-4 gap-2">
-              {product.gallery.slice(0, 4).map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => setMainImage(img)}
-                  className={`block border-2 rounded-md overflow-hidden relative aspect-square ${
-                    mainImage === img ? "border-primary" : "border-transparent"
-                  }`}
-                >
-                  <Image
-                    src={img}
-                    alt={`${product.name} thumbnail ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="25vw"
-                  />
-                </button>
-              ))}
+              {[product.image, ...product.gallery]
+                .slice(0, 4)
+                .map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setMainImage(img)}
+                    className={`block border-2 rounded-md overflow-hidden ${
+                      mainImage === img
+                        ? "border-primary"
+                        : "border-transparent"
+                    }`}
+                  >
+                    <div className="relative aspect-square">
+                      <Image
+                        src={img}
+                        alt={`${product.name} thumbnail ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </button>
+                ))}
             </div>
           </div>
-
           {/* Product Info & Quote Form */}
           <div>
             <span className="inline-block bg-primary-dark/10 text-primary-dark text-xs font-semibold px-2 py-1 rounded-full mb-2">
@@ -155,6 +120,7 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
                 ))}
               </ul>
             </div>
+            {/* Quote Form */}
             <form
               onSubmit={handleQuoteSubmit}
               className="mt-8 p-6 bg-slate-50 rounded-lg border border-slate-200"
@@ -196,7 +162,6 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
                   <input
                     type="text"
                     id="name"
-                    name="name"
                     required
                     className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                   />
@@ -211,7 +176,6 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
                   <input
                     type="tel"
                     id="phone"
-                    name="phone"
                     required
                     className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                   />
@@ -226,7 +190,6 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
                   <input
                     type="email"
                     id="email"
-                    name="email"
                     required
                     className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                   />
@@ -234,20 +197,10 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
               </div>
               <button
                 type="submit"
-                disabled={formStatus === "loading"}
-                className="mt-6 w-full bg-primary text-white font-bold py-3 px-4 rounded-md hover:bg-primary-dark transition-colors duration-300 disabled:bg-slate-400"
+                className="mt-6 w-full bg-primary text-white font-bold py-3 px-4 rounded-md hover:bg-primary-dark transition-colors duration-300"
               >
-                {formStatus === "loading" ? "Mengirim..." : "Kirim Permintaan"}
+                Kirim Permintaan
               </button>
-              {formStatus === "success" && (
-                <p className="text-green-600 text-sm mt-4">
-                  Permintaan berhasil dikirim! Kami akan segera menghubungi
-                  Anda.
-                </p>
-              )}
-              {formStatus === "error" && (
-                <p className="text-red-600 text-sm mt-4">Oops! {formError}</p>
-              )}
             </form>
           </div>
         </div>

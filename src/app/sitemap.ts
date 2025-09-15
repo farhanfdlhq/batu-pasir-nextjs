@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (route) => ({
       url: `${siteUrl}${route}`,
       lastModified: new Date(),
-      changeFrequency: "monthly" as const,
+      changeFrequency: "monthly",
       priority: route === "" ? 1 : 0.8,
     })
   );
@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const productRoutes = PRODUCTS.map((product) => ({
     url: `${siteUrl}/product/${product.id}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
+    changeFrequency: "weekly",
     priority: 0.6,
   }));
 
