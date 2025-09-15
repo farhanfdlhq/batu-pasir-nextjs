@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { PRODUCTS } from "../constants";
+import Image from "next/image";
 import {
   CheckCircleIcon,
   ChevronRightIcon,
@@ -30,10 +31,12 @@ const HomePage: React.FC = () => {
       {/* Hero Section */}
       <section className="relative bg-secondary text-white h-[60vh] min-h-[400px] flex items-center">
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <img
-          src="images/hero-sections.png"
+        <Image
+          src="/images/hero-sections.png"
           alt="Construction site"
+          fill
           className="absolute inset-0 w-full h-full object-cover"
+          priority
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-shadow-lg">

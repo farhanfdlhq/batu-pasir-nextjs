@@ -1,16 +1,18 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header"; // Pastikan path import benar
-import Footer from "@/components/Footer"; // Pastikan path import benar
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  // --- TAMBAHKAN BARIS INI ---
+  metadataBase: new URL("https://batu-pasir-nextjs.vercel.app"), // Ganti dengan URL Vercel Anda nanti
+  // -------------------------
   title: "Batu Pasir Jaya - Supplier Material Bangunan",
   description:
-    "A modern web application for a stone and sand supply company, featuring a product catalog, company profile, and an AI-powered project material estimator.",
+    "Supplier material bangunan terpercaya untuk proyek rumah maupun konstruksi skala besar. Pengiriman cepat, harga kompetitif, dan layanan profesional.",
 };
 
 export default function RootLayout({

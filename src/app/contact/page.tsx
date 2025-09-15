@@ -1,12 +1,47 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { PhoneIcon, MailIcon, MapPinIcon } from "@/components/IconComponents";
 
 const ContactPage: React.FC = () => {
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Terima kasih atas pesan Anda. Kami akan segera merespons.");
-    (e.target as HTMLFormElement).reset();
+    setStatus("loading");
+    setErrorMessage("");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+      phone: formData.get("phone") || "Tidak diisi", // Menambahkan phone
+    };
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(result.error || "Gagal mengirim pesan.");
+      }
+
+      setStatus("success");
+      (e.target as HTMLFormElement).reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Terjadi kesalahan."
+      );
+    }
   };
 
   return (
@@ -21,9 +56,7 @@ const ContactPage: React.FC = () => {
             telepon, atau kunjungi kantor kami.
           </p>
         </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Form */}
           <div className="lg:col-span-2 bg-white p-8 rounded-lg shadow-md border border-slate-200">
             <h2 className="text-2xl font-bold text-secondary mb-6">
               Kirim Pesan
@@ -40,6 +73,7 @@ const ContactPage: React.FC = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
                     className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                   />
@@ -54,6 +88,7 @@ const ContactPage: React.FC = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
                     className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                   />
@@ -69,6 +104,7 @@ const ContactPage: React.FC = () => {
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
                   required
                   className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
                 />
@@ -82,6 +118,7 @@ const ContactPage: React.FC = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
                   required
                   className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
@@ -90,15 +127,23 @@ const ContactPage: React.FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full bg-primary text-white font-bold py-3 px-4 rounded-md hover:bg-primary-dark transition-colors duration-300"
+                  disabled={status === "loading"}
+                  className="w-full bg-primary text-white font-bold py-3 px-4 rounded-md hover:bg-primary-dark transition-colors duration-300 disabled:bg-slate-400"
                 >
-                  Kirim Pesan
+                  {status === "loading" ? "Mengirim..." : "Kirim Pesan"}
                 </button>
               </div>
+              {status === "success" && (
+                <p className="text-green-600 mt-4">
+                  Pesan berhasil dikirim! Terima kasih.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-red-600 mt-4">Oops! {errorMessage}</p>
+              )}
             </form>
           </div>
 
-          {/* Contact Details */}
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
               <h3 className="text-xl font-bold text-secondary mb-4">
@@ -145,7 +190,7 @@ const ContactPage: React.FC = () => {
               <h3 className="text-xl font-bold text-secondary mb-4">
                 Lokasi Kami
               </h3>
-              <div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden bg-slate-200">
+              <div className="aspect-[16/9] rounded-md overflow-hidden bg-slate-200">
                 <iframe
                   src="https://maps.app.goo.gl/iU6nJE5SqmxRHNH77"
                   width="100%"
