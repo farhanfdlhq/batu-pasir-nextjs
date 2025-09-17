@@ -11,9 +11,9 @@ export interface Product {
   name: string;
   category: Category;
   description: string;
-  price: number;
+  price?: number;
   unit: string;
-  stock: number;
+  stock?: number;
   image: string;
   gallery: string[];
   specifications: {

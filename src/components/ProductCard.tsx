@@ -8,16 +8,8 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
-
   return (
-    <div className="bg-white border ...">
+    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <Link href={`/product/${product.id}`} className="block">
         <div className="overflow-hidden aspect-[16/9] relative">
           <Image
@@ -38,7 +30,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <p className="text-slate-500 text-sm mt-2 h-10 overflow-hidden">
             {product.description}
           </p>
-          {/* Hapus blok harga dan stok */}
           <div className="mt-4 flex items-center justify-between">
             <p className="text-lg font-bold text-primary">Kontak untuk Info</p>
             <span className="text-sm text-slate-500">Unit: {product.unit}</span>
@@ -56,4 +47,5 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     </div>
   );
 };
+
 export default ProductCard;
