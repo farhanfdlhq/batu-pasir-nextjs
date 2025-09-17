@@ -192,7 +192,7 @@ const ContactPage: React.FC = () => {
               </h3>
               <div className="aspect-[16/9] rounded-md overflow-hidden bg-slate-200">
                 <iframe
-                  src="https://maps.app.goo.gl/iU6nJE5SqmxRHNH77"
+                  src="https://maps.app.goo.gl/Hc58C2dSNxduztZh8"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

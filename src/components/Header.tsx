@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TruckIcon, MenuIcon, XIcon } from "./IconComponents";
+import Image from "next/image"; // Import Image
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,8 +32,11 @@ const Header: React.FC = () => {
               href="/"
               className="flex items-center space-x-2 text-white hover:text-primary transition-colors"
             >
-              <TruckIcon className="h-8 w-8" />
-              <span className="text-xl font-bold">Batu Pasir Jaya</span>
+              {/* Ganti ikon default dengan logo jika ada, atau teks */}
+              {/* <Image src="/logo-bje.png" alt="Logo BJE" width={40} height={40} /> */}
+              <span className="text-lg font-bold">
+                PT Borneo Jayaprima Energy
+              </span>
             </Link>
           </div>
           <div className="hidden md:block">

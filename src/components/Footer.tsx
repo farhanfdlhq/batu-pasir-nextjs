@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { TruckIcon, PhoneIcon, MailIcon, MapPinIcon } from "./IconComponents";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
@@ -10,105 +11,65 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-3 lg:col-span-1">
             <Link
               href="/"
-              className="flex items-center space-x-2 text-white mb-4"
+              className="flex flex-col items-start space-y-2 text-white mb-4"
             >
-              <TruckIcon className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold">Batu Pasir Jaya</span>
+              {/* Anda bisa menambahkan logo di sini */}
+              <span className="text-xl font-bold">
+                PT Borneo Jayaprima Energy
+              </span>
+              <span className="text-md font-semibold text-slate-400">
+                Ardy Truck
+              </span>
             </Link>
             <p className="text-sm text-slate-400">
-              Supplier material bangunan terpercaya untuk proyek rumah maupun
-              konstruksi skala besar. Pengiriman cepat, harga kompetitif, dan
-              layanan profesional.
+              Supplier material bangunan dan penyewaan alat berat terpercaya
+              untuk proyek Anda.
             </p>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Navigasi</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="hover:text-primary transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/catalog"
-                  className="hover:text-primary transition-colors"
-                >
-                  Katalog Produk
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="hover:text-primary transition-colors"
-                >
-                  Tentang Kami
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="hover:text-primary transition-colors"
-                >
-                  Kontak
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/estimator"
-                  className="hover:text-primary transition-colors"
-                >
-                  AI Estimator
-                </Link>
-              </li>
-            </ul>
-          </div>
+
+          {/* Navigasi (tidak berubah) */}
+
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">
               Hubungi Kami
             </h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-start">
-                <MapPinIcon className="h-5 w-5 mr-3 mt-1 text-primary flex-shrink-0" />
-                <span>
-                  jl sulawesi gg flamboyan no 14 rt 21 Sangatta, Kab Kutai timur
-                </span>
-              </li>
+              {/* ... (alamat tidak berubah) ... */}
               <li className="flex items-center">
                 <PhoneIcon className="h-5 w-5 mr-3 text-primary" />
                 <a
-                  href="tel:+628123456789"
+                  href="tel:+6281253872108"
                   className="hover:text-primary transition-colors"
                 >
-                  +62-8123456789
+                  +62 812-5387-2108
                 </a>
               </li>
               <li className="flex items-center">
                 <MailIcon className="h-5 w-5 mr-3 text-primary" />
                 <a
-                  href="mailto:sales@batupasirjaya.com"
+                  href="mailto:Ardyharyanto354@gmail.com"
                   className="hover:text-primary transition-colors"
                 >
-                  sales@batupasirjaya.com
+                  Ardyharyanto354@gmail.com
                 </a>
               </li>
             </ul>
           </div>
+
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">
               Jam Operasional
             </h3>
             <ul className="space-y-2 text-sm">
-              <li>Senin - Jumat: 08:00 - 17:00 WIB</li>
-              <li>Sabtu: 08:00 - 14:00 WIB</li>
-              <li>Minggu & Hari Libur: Tutup</li>
+              <li>Senin - Minggu: 06:00 - 20:00 WITA</li>
+              <li>Beroperasi 7x24 Jam (sesuai perjanjian)</li>
             </ul>
           </div>
         </div>
         <div className="mt-12 border-t border-slate-700 pt-8 text-center text-sm text-slate-500">
           <p>
-            &copy; {new Date().getFullYear()} Batu Pasir Jaya. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} PT Borneo Jayaprima Energy. All
+            rights reserved.
           </p>
         </div>
       </div>

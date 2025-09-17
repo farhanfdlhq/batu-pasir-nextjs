@@ -1,9 +1,9 @@
-
 export enum Category {
   TANAH = "Tanah",
   PASIR = "Pasir",
   BATU = "Batu",
   BATA = "Bata",
+  ALAT_BERAT = "Alat Berat",
 }
 
 export interface Product {

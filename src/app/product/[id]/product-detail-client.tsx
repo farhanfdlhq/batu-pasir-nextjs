@@ -88,19 +88,16 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
           </div>
           {/* Product Info & Quote Form */}
           <div>
-            <span className="inline-block bg-primary-dark/10 text-primary-dark text-xs font-semibold px-2 py-1 rounded-full mb-2">
-              {product.category}
-            </span>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-secondary">
-              {product.name}
-            </h1>
-            <p className="text-3xl font-bold text-primary mt-4">
-              {formatPrice(product.price)}
-              <span className="text-lg font-medium text-slate-500">
-                {" "}
-                / {product.unit}
-              </span>
+            {/* ... (kategori & nama) ... */}
+
+            {/* Hapus elemen <p> yang menampilkan harga */}
+            {/* <p className="text-3xl font-bold text-primary mt-4"> ... </p> */}
+
+            <p className="mt-6 text-lg text-secondary font-semibold">
+              Untuk informasi harga dan ketersediaan, silakan isi form penawaran
+              di bawah atau hubungi kami.
             </p>
+
             <p className="mt-4 text-slate-600 leading-relaxed">
               {product.description}
             </p>
@@ -205,8 +202,8 @@ const ProductDetailClient: React.FC<{ product: Product | undefined }> = ({
           </div>
         </div>
       </div>
+      {/* ... */}
     </div>
   );
 };
-
 export default ProductDetailClient;
