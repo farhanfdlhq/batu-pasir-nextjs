@@ -168,7 +168,7 @@ const ContactPage: React.FC = () => {
                       href="tel:+628123456789"
                       className="text-slate-600 hover:text-primary transition-colors"
                     >
-                      +62-8123456789
+                      +62 812-5387-2108
                     </a>
                   </div>
                 </li>
@@ -177,10 +177,10 @@ const ContactPage: React.FC = () => {
                   <div>
                     <h4 className="font-semibold">Email</h4>
                     <a
-                      href="mailto:sales@batupasirjaya.com"
+                      href="mailto:Ardyharyanto354@gmail.com"
                       className="text-slate-600 hover:text-primary transition-colors"
                     >
-                      sales@batupasirjaya.com
+                      Ardyharyanto354@gmail.com
                     </a>
                   </div>
                 </li>
