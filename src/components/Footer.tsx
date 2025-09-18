@@ -13,7 +13,12 @@ const Footer: React.FC = () => {
               href="/"
               className="flex flex-col items-start space-y-2 text-white mb-4"
             >
-              {/* Anda bisa menambahkan logo di sini */}
+              <Image
+                src="/images/logo-pt.png"
+                alt="Logo PT Borneo Jayaprima Energy"
+                width={150} // Sesuaikan lebar
+                height={42} // Sesuaikan tinggi
+              />
               <span className="text-xl font-bold">
                 PT Borneo Jayaprima Energy
               </span>

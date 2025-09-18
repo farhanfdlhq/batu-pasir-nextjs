@@ -32,8 +32,13 @@ const Header: React.FC = () => {
               href="/"
               className="flex items-center space-x-2 text-white hover:text-primary transition-colors"
             >
-              {/* Ganti ikon default dengan logo jika ada, atau teks */}
-              {/* <Image src="/logo-bje.png" alt="Logo BJE" width={40} height={40} /> */}
+              <Image
+                src="/images/logo-pt.png"
+                alt="Logo PT Borneo Jayaprima Energy"
+                width={40}
+                height={40}
+                priority
+              />
               <span className="text-lg font-bold">
                 PT Borneo Jayaprima Energy
               </span>
